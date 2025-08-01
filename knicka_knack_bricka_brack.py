@@ -1,3 +1,5 @@
+'''My version of the classic game Break Out. Adapted for code by LeMasterTechYT.'''
+
 import pygame
 import random
 
@@ -40,6 +42,7 @@ large_font = pygame.font.SysFont("Arial", 40)
 
 def create_new_board():
     new_board = []
+    # board size
     rows = random.randint(4, 9)
     for index in range(rows):
         row = []
@@ -56,6 +59,7 @@ def draw_board(board_bricks):
             if board_bricks[i][j] > 0:
                  pygame.draw.rect(screen, colors[(board_bricks[i][j]) - 1], [j * 100, i * 40, 98, 38], 0, 5)
                  pygame.draw.rect(screen, black, [j * 100, i * 40, 98, 38], 1, 5)
+                 #brick size
                  top = pygame.rect.Rect((j * 100, i * 40), (98, 1))
                  bot = pygame.rect.Rect((j * 100, (i * 40) + 37), (98, 1))
                  left = pygame.rect.Rect((j * 100, i * 40), (37, 1))
@@ -129,7 +133,7 @@ while run:
         ball_y_direction *= -1
 
 
-
+# Game restart conditions
     if ball_y >= HEIGHT - 10 or len(squares) == 0:
         active = False
         player_x = 190
@@ -141,7 +145,10 @@ while run:
         ball_x = WIDTH / 2
         ball_y = HEIGHT - 30
         board = []
+        if len(squares) == 0:
+            win_text = large_font.render('You win!', True, black)
 
+#message displays
     score_text = font.render(f'Score {score}', True, black,)
     screen.blit(score_text, (10, 5))
     score_text = font.render(f'Score {score}', True, black,)
